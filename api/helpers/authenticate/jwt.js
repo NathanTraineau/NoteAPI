@@ -60,7 +60,7 @@ module.exports = {
       }
       return exits.success(user);
     } catch (err) {
-      return exits.error(err);
+      return exits.unauthorized(err);
     }
   }
 
