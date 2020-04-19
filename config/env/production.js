@@ -47,7 +47,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      datastore: 'prod'
+      url: process.env.MONGODB_URI
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -90,7 +90,6 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     migrate: 'safe',
-    datastore : 'prod',
 
     /***************************************************************************
     *                                                                          *

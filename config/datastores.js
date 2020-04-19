@@ -49,12 +49,12 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mongo',
-    //url: 'mongodb://AdminSinge:singe@localhost:27017/singenotedev',
-    host: 'localhost',
-    port: '27017',
+    url: 'mongodb://:@localhost:27017/singenotedev',
+    //host: 'localhost',
+    //port: '27017',
     //user: 'chatbot',
     //password: 'solutec',
-    database: 'singenotedev'
+    //database: 'singenotedev'
   },
 
   prod : {
