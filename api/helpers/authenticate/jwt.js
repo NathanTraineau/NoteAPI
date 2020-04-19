@@ -20,6 +20,7 @@ module.exports = {
 
   },
   fn: function ({req}, exits) {
+    console.log(jwtconfig.secret)
     const bearerHeader = req.headers['authorization'] || req.body.token || req.query.token;
 
     if (bearerHeader) {
