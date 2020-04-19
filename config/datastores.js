@@ -48,13 +48,19 @@ module.exports.datastores = {
     *    (See https://sailsjs.com/config/datastores for help.)                 *
     *                                                                          *
     ***************************************************************************/
-    adapter: 'sails-mongo',
-    url: process.env.MONGODB_URI
-    //host: 'localhost',
-    //port: '27017',
+    /*adapter: 'sails-mongo',
+    //url: 'mongodb://AdminSinge:singe@localhost:27017/singenotedev',
+    host: 'localhost',
+    port: '27017',
     //user: 'chatbot',
     //password: 'solutec',
-    //database: 'singenotedev'
+    database: 'singenotedev'*/
   },
+
+  prod : {
+    adapter: 'sails-mongo',
+    url: process.env.MONGODB_URI
+  }
+
 
 };
