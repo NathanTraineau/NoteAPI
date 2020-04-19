@@ -20,7 +20,7 @@ module.exports = async function (req, res, proceed) {
       case 'methodNotAllowed' :
         return res.methodNotAllowed();
       case 'badRequest' :
-        return res.badRequest(err);
+        return res.badRequest();
       case 'notFound' :
         return res.notFound();
       default:

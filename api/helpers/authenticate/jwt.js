@@ -22,7 +22,7 @@ module.exports = {
   exits: {
 
     unauthorized: {
-      description: 'Unauthorized access, missing or invalid authorization access',
+      description: 'Unauthorized access, invalid authorization access',
     },
     badRequest: {
       description: 'Bad request, error from the client',
@@ -37,7 +37,6 @@ module.exports = {
     },
     error: {
       description: 'Internal server error from create folder',
-      responseType: 'serverError'
     }
 
   },
