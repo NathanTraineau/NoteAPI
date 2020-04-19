@@ -47,7 +47,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      url: process.env.MONGODB_URI
+      datastore: 'prod'
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -90,7 +90,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     migrate: 'safe',
-
+    datastore: 'prod'
     /***************************************************************************
     *                                                                          *
     * If, in production, this app has access to physical-layer CASCADE         *
