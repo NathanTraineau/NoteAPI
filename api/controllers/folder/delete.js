@@ -1,9 +1,16 @@
 /**
- * Account delete controller
+ * Folder delete controller
  */
 
 module.exports = {
 
+  inputs: {
+
+    id: {
+      type: 'string',
+      maxLength: 100,
+    },
+  },
   exits: {
 
     success: {
@@ -34,7 +41,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let {account} = this.req;
+    let {user} = this.req;
 
     let folder = await Folder.findOne({id : inputs.id});
 
@@ -42,12 +49,19 @@ module.exports = {
       exits.badRequest();
     }
 
-    if (folder.author === account.id){
-      await Folder.destroyOne({id: account.id})
+    if (folder.author === user.id){
+      await Folder.destroy({parent: inputs.id});
+      await Note.destroy({parent: inputs.id});
+      await Idea.destroy({parent: inputs.id});
+      await Todo.destroy({parent: inputs.id});
+
+      await Folder.destroyOne({id: inputs.id})
         .intercept('*', 'serverError');
-      return exits.unauthorized();
+      exits.success();
+    }
+    else{
+      exits.unauthorized();
     }
 
-    exits.error();
   }
 };

@@ -22,7 +22,15 @@ module.exports = {
     },
     content: {
       type:'json'
-    }
+    },
+    hashtags: {
+      type:'json'
+    },
+    color: {
+      type:'string',
+      maxLength: 50,
+      example: '67Gyhkkuhfjtgf768'
+    },
 
 
   },

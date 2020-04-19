@@ -16,7 +16,15 @@ module.exports = {
       type: 'string',
       maxLength: 100,
       example: 'Jean'
-    }
+    },
+    hashtags: {
+      type:'json'
+    },
+    color: {
+      type:'string',
+      maxLength: 50,
+      example: '67Gyhkkuhfjtgf768'
+    },
 
 
   },
@@ -35,7 +43,7 @@ module.exports = {
     error: {
       description: 'Internal server error',
       responseType: 'serverError'
-    }
+    },
   },
   fn: async function (inputs, exits) {
 

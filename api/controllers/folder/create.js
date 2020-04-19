@@ -25,6 +25,11 @@ module.exports = {
       maxLength: 50,
       example: '67Gyhkkuhfjtgf768'
     },
+    color: {
+      type:'string',
+      maxLength: 50,
+      example: '67Gyhkkuhfjtgf768'
+    },
 
 
   },

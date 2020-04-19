@@ -20,6 +20,14 @@ module.exports = {
     content: {
       type:'json'
     },
+    hashtags: {
+      type:'json'
+    },
+    color: {
+      type:'string',
+      maxLength: 50,
+      example: '67Gyhkkuhfjtgf768'
+    },
   },
   exits: {
     success: {
@@ -46,7 +54,7 @@ module.exports = {
       exits.badRequest();
     }
 
-    if( folderItem.accessibleBy !== this.req.user.id){ //A modifier pour que ca prennenune array de personnes
+    if( folderItem.accessibleBy !== this.req.user.id){ //A modifier pour que ca prenne une array de personnes
       exits.unauthorized();
     }
     let updatedFolder = await Idea.updateFolder({id: this.req.id})
