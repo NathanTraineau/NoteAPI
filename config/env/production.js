@@ -47,10 +47,8 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      prod : {
-        adapter: 'sails-mongo',
-        url: process.env.MONGODB_URI
-      }
+      adapter: 'sails-mongo',
+      url: process.env.MONGODB_URI
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -73,7 +71,10 @@ module.exports = {
       *                                                                           *
       ****************************************************************************/
       // ssl: true,
-
+      prod : {
+        adapter: 'sails-mongo',
+        url: process.env.MONGODB_URI
+      }
     },
 
   },
