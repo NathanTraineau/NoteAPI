@@ -47,7 +47,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      connection : 'prod'
+      datastore : 'prod'
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -90,7 +90,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     migrate: 'safe',
-    connection : 'prod'
+    datastore : 'prod'
 
     /***************************************************************************
     *                                                                          *
