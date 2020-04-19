@@ -73,7 +73,7 @@ module.exports = {
     // If the type doesn't exist create one
       try {
         await FolderType
-          .create({inputs})
+          .create({title : type})
           .fetch();
       }
       catch (err) {
