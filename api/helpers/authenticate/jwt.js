@@ -19,23 +19,49 @@ module.exports = {
     },
 
   },
+  exits: {
+
+    unauthorized: {
+      description: 'Unauthorized access, missing or invalid authorization access',
+    },
+    badRequest: {
+      description: 'Bad request, error from the client',
+    },
+
+    notFound: {
+      description: 'Resource not found',
+    },
+
+    methodNotAllowed: {
+      description: 'Method not allowed',
+    },
+    error: {
+      description: 'Internal server error from create folder',
+      responseType: 'serverError'
+    }
+
+  },
   fn: function ({req}, exits) {
     const bearerHeader = req.headers['authorization'] || req.body.token || req.query.token;
-    console.log('bearerHeader' + bearerHeader)
+    console.log('bearerHeader ' + JSON.stringify(bearerHeader))
+    console.log('header ' + JSON.stringify(req.headers))
     if (bearerHeader) {
       const bearer = bearerHeader.split(' ');
       const bearerToken = bearer[1];
       req.token = bearerToken;
     }else{
-      return exits.error(error);
+      return exits.badRequest();
     }
 
     try {
       console.log('jwtconfig.secret'+jwtconfig.secret);
       const user = jwt.verify(req.token, jwtconfig.secret);
+      if(!user){
+        return exits.unauthorized();
+      }
       return exits.success(user);
-    } catch (error) {
-      return exits.error(error);
+    } catch (err) {
+      return exits.error(err);
     }
   }
 

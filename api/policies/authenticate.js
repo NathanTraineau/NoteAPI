@@ -4,10 +4,29 @@
 
 module.exports = async function (req, res, proceed) {
 
-  req.user =
-    await sails.helpers.authenticate.jwt(req, res)
-      .intercept('*', (err) => res.serverError(err));
+  try{
+    req.user =
+    await sails.helpers.authenticate.jwt(req, res);
 
-  return proceed();
+    return proceed();
+  }catch(err){
 
+    switch(err.code){
+
+      case 'unauthorized' :
+        return res.unauthorized();
+      case 'forbidden' :
+        return res.forbidden();
+      case 'methodNotAllowed' :
+        return res.methodNotAllowed();
+      case 'badRequest' :
+        return res.badRequest(err);
+      case 'notFound' :
+        return res.notFound();
+      default:
+        return res.serverError(err);
+
+    }
+
+  }
 };
