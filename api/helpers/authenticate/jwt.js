@@ -21,7 +21,7 @@ module.exports = {
   },
   fn: function ({req}, exits) {
     const bearerHeader = req.headers['authorization'] || req.body.token || req.query.token;
-
+    console.log('bearerHeader' + bearerHeader)
     if (bearerHeader) {
       const bearer = bearerHeader.split(' ');
       const bearerToken = bearer[1];
@@ -31,6 +31,7 @@ module.exports = {
     }
 
     try {
+      console.log('jwtconfig.secret'+jwtconfig.secret);
       const user = jwt.verify(req.token, jwtconfig.secret);
       return exits.success(user);
     } catch (error) {

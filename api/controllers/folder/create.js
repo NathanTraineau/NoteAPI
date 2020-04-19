@@ -46,7 +46,7 @@ module.exports = {
       responseType: 'unauthorized'
     },
     error: {
-      description: 'Internal server error',
+      description: 'Internal server error from create folder',
       responseType: 'serverError'
     }
   },

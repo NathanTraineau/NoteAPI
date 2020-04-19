@@ -1,7 +1,6 @@
 /**
  * Authentication configuration
  */
-var dotenv = require('dotenv');
 
 
 module.exports.authentication = {
