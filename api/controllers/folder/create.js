@@ -53,9 +53,7 @@ module.exports = {
   fn: async function ({title, type, parent}, exits) {
 
     const { user } = this.req;
-    console.log('hhhhhhhhhhhhhhhh')
     if(parent){
-      console.log('parent' + parent)
       let folderItem = await Folder.findOne({id: parent});
 
       if(!folderItem) {
