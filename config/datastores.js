@@ -57,10 +57,5 @@ module.exports.datastores = {
     //database: 'singenotedev'
   },
 
-  prod : {
-    adapter: 'sails-mongo',
-    url: process.env.MONGODB_URI
-  }
-
 
 };
