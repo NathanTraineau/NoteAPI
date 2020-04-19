@@ -89,7 +89,6 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     migrate: 'safe',
-    datastore: 'prod'
     /***************************************************************************
     *                                                                          *
     * If, in production, this app has access to physical-layer CASCADE         *

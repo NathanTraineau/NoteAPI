@@ -49,18 +49,12 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mongo',
-    url: 'mongodb://:@localhost:27017/singenotedev',
+    url: process.env.MONGODB_URI
     //host: 'localhost',
     //port: '27017',
     //user: 'chatbot',
     //password: 'solutec',
     //database: 'singenotedev'
   },
-
-  prod : {
-    adapter: 'sails-mongo',
-    url: process.env.MONGODB_URI
-  }
-
 
 };
