@@ -47,7 +47,6 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      datastore: 'prod'
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
