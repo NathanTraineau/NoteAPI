@@ -9,6 +9,7 @@ module.exports = {
 
     id: {
       type: 'string',
+      required: true,
       maxLength: 100,
     },
   },

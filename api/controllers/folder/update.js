@@ -10,15 +10,13 @@ module.exports = {
 
     id: {
       type: 'string',
+      required: true,
       maxLength: 100,
     },
     title: {
       type: 'string',
       maxLength: 100,
       example: 'Jean'
-    },
-    content: {
-      type:'json'
     },
     hashtags: {
       type:'json'
@@ -28,6 +26,18 @@ module.exports = {
       maxLength: 50,
       example: '67Gyhkkuhfjtgf768'
     },
+    password: {
+      type: 'string',
+      example: 'Pa$$Ex@mple1234'
+    },
+    oldPassword: {
+      type: 'string',
+      example: 'Pa$$Ex@mple1234'
+    },
+    newPassword: {
+      type: 'string',
+      example: 'Pa$$Ex@mple1234'
+    }
   },
   exits: {
     success: {
@@ -44,11 +54,21 @@ module.exports = {
     error: {
       description: 'Internal server error',
       responseType: 'serverError'
-    }
+    },
+    forbidden: {
+      description: 'Forbidden access, user rights are insufficient',
+      responseType: 'forbidden'
+    },
   },
   fn: async function (inputs, exits) {
 
-    let folderItem = await Folder.findOne({id: this.req.id});
+    const { user } = this.req;
+
+    let folderItem = await Folder.findOne({
+      where: { id: inputs.id, accessibleBy: user.id }
+    });
+
+    let updatedFolder;
 
     if (!folderItem){
       exits.badRequest();
@@ -57,9 +77,50 @@ module.exports = {
     if( folderItem.accessibleBy !== this.req.user.id){ //A modifier pour que ca prenne une array de personnes
       exits.unauthorized();
     }
-    let updatedFolder = await Idea.updateFolder({id: this.req.id})
-              .set(inputs)
+
+    if(folderItem.isSecured){
+      if(!inputs.password) {
+        return exits.forbidden();
+      }
+      let match =
+        await sails.helpers.password
+          .validate(inputs.password, folderItem.password);
+
+      if (!match) {
+        return exits.forbidden();
+      }
+    }
+
+    if (inputs.newPassword || inputs.newPassword === '' ) {
+      console.log(folderItem.isSecured)
+      if(folderItem.isSecured){
+        console.log('secured')
+        if(!inputs.oldPassword) {
+          return exits.forbidden();
+        }
+
+        let match =
+          await sails.helpers.password
+            .validate(inputs.oldPassword, folderItem.password);
+
+        if (!match) {
+          return exits.forbidden();
+        }
+      }
+
+      const newPassword = inputs.newPassword;
+      delete inputs.newPassword;
+      delete inputs.oldPassword;
+      updatedFolder = await Folder.updateOne({where: { id: inputs.id, accessibleBy: user.id }})
+              .set({password : newPassword, isSecured : newPassword === '' ? false : true,  ...inputs})
               .intercept('*', 'serverError');
+    }
+
+    else {
+      updatedFolder = await Folder.updateOne({where: { id: inputs.id, accessibleBy: user.id }})
+              .set({...inputs})
+              .intercept('*', 'serverError');
+    }
 
     let folder =
             await Folder

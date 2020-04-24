@@ -19,6 +19,9 @@ module.exports = {
       maxLength: 100,
       example: 'Jean'
     },
+    isSecured: {
+      type: 'boolean',
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -40,6 +43,10 @@ module.exports = {
       collection: 'idea',
       via: 'parent'
     },
+    todoChildrens: {
+      collection: 'todo',
+      via: 'parent'
+    },
     parent:{
       model: 'folder'
     },
@@ -52,8 +59,28 @@ module.exports = {
     accessibleBy: {
       model: 'user',
     },
+
   },
+  beforeCreate: async function(payload, proceed) {
 
+    if(payload.password){
+      payload.password = await sails.helpers.password.hash(payload.password);
+      payload.isSecured = true;
+    }else{
+      payload.isSecured = false;
+    }
 
+    return proceed();
+
+  },
+  beforeUpdate: async function(payload, proceed) {
+
+    if(payload.password){
+      payload.password = await sails.helpers.password.hash(payload.password);
+    }
+
+    return proceed();
+
+  }
 };
 

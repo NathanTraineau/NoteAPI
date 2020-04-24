@@ -7,7 +7,6 @@
 
 module.exports = {
   inputs: {
-
     title: {
       type: 'string',
       required: true,
@@ -30,6 +29,10 @@ module.exports = {
       maxLength: 50,
       example: '67Gyhkkuhfjtgf768'
     },
+    password: {
+      type: 'string',
+      example: 'Pa$$Ex@mple1234'
+    }
 
 
   },
@@ -50,9 +53,10 @@ module.exports = {
       responseType: 'serverError'
     }
   },
-  fn: async function ({title, type, parent}, exits) {
+  fn: async function ({title, type, parent, password}, exits) {
 
     const { user } = this.req;
+
     if(parent){
       let folderItem = await Folder.findOne({id: parent});
 
@@ -95,6 +99,7 @@ module.exports = {
       type: folderType.id,
       parent : parent,
       author: user.id,
+      password,
       accessibleBy : user.id
     };
 

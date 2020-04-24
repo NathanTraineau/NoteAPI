@@ -21,7 +21,6 @@ module.exports = {
       maxLength: 50,
       example: 'to-do, jardin, notes'
     },
-
   },
   exits: {
     success: {
@@ -39,14 +38,20 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     let { user } = this.req;
+    let validType;
+    
+    if(inputs.type){
+      validType = await FolderType.findOne({title: inputs.type});
+    }
 
-    let content = await Folder.find({
-      where: { id: inputs.id, accessibleBy: user.id, parent: inputs.parent, type: inputs.type },
+
+    let folder = await Folder.find({
+      where: { id: inputs.id, accessibleBy: user.id, parent: inputs.parent, type: validType ? validType.id : inputs.type },
       sort: 'updatedAt DESC'
     })
     .intercept('*', 'serverError');
 
-    return exits.success(content);
+    return exits.success(folder);
 
   }
 };

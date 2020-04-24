@@ -23,7 +23,9 @@ module.exports.routes = {
   'POST    /register': 'user/register',
   'POST    /createFolder': 'folder/create',
   'POST    /deleteFolder': 'folder/delete',
+  'POST    /updateFolder': 'folder/update',
   'GET    /getFolder': 'folder/read',
+  'GET    /getOneFolder': 'folder/readone',
 
   'POST    /createIdea': 'idea/create',
   'POST    /updateIdea': 'idea/update',
